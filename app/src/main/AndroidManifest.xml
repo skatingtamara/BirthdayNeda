@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cupcake">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.birthdayNeda.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

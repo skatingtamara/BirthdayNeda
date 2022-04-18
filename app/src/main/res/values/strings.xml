@@ -16,10 +16,10 @@
 <resources>
     <string name="app_name">Happy 40th Birthday Neda!!</string>
     <string name="order_cupcakes">How many gifts do you want?</string>
-    <string name="one_cupcake">One. I\'m no fool.</string>
+    <string name="one_cupcake">Let\'s do this. I\'m 40 biatch</string>
     <string name="six_cupcakes">Two. OK, a little fun</string>
     <string name="twelve_cupcakes">Five! I\'m 40 biatch</string>
-    <string name="choose_flavor">Pick your top gift - go with your gut!</string>
+    <string name="choose_flavor">What can I get ya?</string>
     <string name="app_only">Just this homemade app, thanks</string>
     <string name="lemon_tree">40 lemon trees :)</string>
     <string name="skatin">Roller skatin starter kit</string>
@@ -30,15 +30,15 @@
     <string name="next">Next</string>
     <string name="choose_gift_date">When do you want your gifts?</string>
     <string name="order_summary">Order Summary</string>
-    <string name="send">Send to Tamara</string>
+    <string name="send">Send deets to Tamara</string>
     <string name="quantity">Number of gifts</string>
-    <string name="top_gift">Top gift pick</string>
+    <string name="desired_gift">Queen\'s request</string>
     <string name="gift_date">Gift date</string>
     <string name="subtotal_hours">Estimated hours to commit %s</string>
     <string name="total_hours">Total hours to commit %s</string>
     <string name="new_cupcake_order">Neda\'s birthday request</string>
-    <string name="gift_details"># of gifts: %1$s \n Top gift: %2$s \nGift date: %3$s \n
-        Total hours: %4$s \n\n Welcome 40s! Bring it!!</string>
+    <string name="gift_details"># of gifts: %1$s \n Selected gifts: %2$s \nGift date: %3$s \n
+        Total hours: %4$s \n\n Welcome 40 and being glamorously selective with the fs you give. XOXOXOXO Love you Neda!!!</string>
     <plurals name="gifts">
         <item quantity="one">%d gift</item>
         <item quantity="other">%d gifts</item>

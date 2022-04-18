@@ -13,18 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.cupcake.model
+package com.example.birthdayNeda.model
 
 import android.content.res.Resources
+import android.util.Log
+import android.view.MenuItem
+import android.view.View
+import android.widget.CheckBox
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.birthdayNeda.data.GiftSource
 import com.example.cupcake.R
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import javax.sql.DataSource
 
 /** Price for a single cupcake */
 private const val PRICE_PER_CUPCAKE = 0.00
@@ -37,6 +43,33 @@ private const val PRICE_FOR_SAME_DAY_PICKUP = 0.00  // @neda
  * pickup date. It also knows how to calculate the total price based on these order details.
  */
 class OrderViewModel : ViewModel() {
+
+
+    ////////// Testing new datamodel
+    // Map of menu items
+    val giftItems = GiftSource.giftItems
+
+    // Default values for gift hours
+    private var previousGiftHours = 0.0
+
+    // Gifts selected
+    private val _selectedGifts: MutableList<GiftItem?> = ArrayList()
+    val selectedGifts: List<GiftItem?> = _selectedGifts
+
+    private var _listOfGiftDescriptions: MutableList<String> = mutableListOf()
+    var listOfGiftDescriptions: List<String> = emptyList()
+
+    // Subtotal of hours
+    private val _subtotal = MutableLiveData(0.0)
+    val subtotal: LiveData<Double> = _subtotal
+
+
+
+
+    //////////////////////////////////
+
+
+    //////////////// Original working model   vvvvvvvvvvv
 
     // Quantity of cupcakes in this order
     private val _quantity = MutableLiveData<Int>()
@@ -63,7 +96,7 @@ class OrderViewModel : ViewModel() {
 
     val price: MutableLiveData<Double> = _price
 
-
+    //////////////// Original working model ^^^^^^^^^
 
 
     init {
@@ -78,7 +111,7 @@ class OrderViewModel : ViewModel() {
      */
     fun setQuantity(numberCupcakes: Int) {
         _quantity.value = numberCupcakes
-        updatePrice()
+
     }
 
     /**
@@ -88,7 +121,59 @@ class OrderViewModel : ViewModel() {
      */
     fun setFlavor(desiredFlavor: String) {
         _flavor.value = desiredFlavor
-        updatePrice()
+    //    updatePrice()
+    }
+
+    // choose gifts
+    fun onCheckboxClicked(view: View) {
+        if (view is CheckBox) {
+            val checked: Boolean = view.isChecked
+            when (view.id) {
+                R.id.checkbox_app -> {
+                    if (checked) {
+                        _selectedGifts.add(giftItems["app"])
+
+                    } else {
+                        _selectedGifts.remove(giftItems["app"])
+                    }
+                }
+                R.id.checkbox_lemon -> {
+                    if (checked) {
+                        _selectedGifts.add(giftItems["lemon"])
+                    } else {
+                        _selectedGifts.remove(giftItems["lemon"])
+                    }
+                }
+                R.id.checkbox_skatin -> {
+                    if (checked) {
+                        _selectedGifts.add(giftItems["skatin"])
+                    } else {
+                        _selectedGifts.remove(giftItems["skatin"])
+                    }
+                }
+                R.id.checkbox_bod -> {
+                    if (checked) {
+                        _selectedGifts.add(giftItems["bod"])
+                    } else {
+                        _selectedGifts.remove(giftItems["bod"])
+                    }
+                }
+
+            }
+        }
+        updateHours()
+        Log.d("Checkbox logic", "Selected gifts = ${_selectedGifts.toString()}")
+        Log.d( "Checkbox logic", "Count of gifts = ${_selectedGifts.count()}")
+
+
+        // Setting quanity in order to report the summary
+        _quantity.value = _selectedGifts.count()
+        Log.d( "Checkbox logic", "Quantity = ${quantity.value.toString()}")
+
+
+        updateDescriptionList()
+        Log.d("Checkbox logic", "List of gifts: @{fullList}")   // DOESN"T WORK!!! @Tamara
+
     }
 
     /**
@@ -98,7 +183,6 @@ class OrderViewModel : ViewModel() {
      */
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
-        updatePrice()
     }
 
     /**
@@ -116,27 +200,37 @@ class OrderViewModel : ViewModel() {
         _flavor.value = ""
         _date.value = dateOptions[0]
         _price.value = 0.0
+        _selectedGifts.clear()
+        _subtotal.value = 0.0
     }
 
-    /**
-     * Updates the price based on the order details.
-     */
-    private fun updatePrice() {
-        var calculatedPrice = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
-        // If the user selected the first option (today) for pickup, add the surcharge
-        //if (dateOptions[0] == _date.value) {
-        //    calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
-        //}
-        when (_flavor.value) {
-            "Just this homemade app, thanks" -> calculatedPrice = 0.00  // @Tamara how to reference string??
-            "40 lemon trees :)" -> calculatedPrice = 3.14
-            "Roller skatin starter kit" -> calculatedPrice = 4.20
-            "Summer ready bod (includes virtual Tamara!)" -> calculatedPrice = 80.00
-            "Let's do this: I WANT IT ALL" -> calculatedPrice = 87.34
+
+    private fun updateHours() {
+        var addingHours = 0.0
+        for (gift in _selectedGifts) {
+            if (gift != null) {
+                addingHours += gift.hours
+            }
         }
-
-        _price.value = calculatedPrice
+        _subtotal.value = addingHours
     }
+
+    private fun updateDescriptionList() {
+        //_listOfGiftDescriptions = emptyList()
+        var fullList: List<String> = emptyList()
+        for (gift in _selectedGifts) {
+            if (gift != null) {
+                _listOfGiftDescriptions = listOf(gift.description) as MutableList<String>
+                fullList = fullList + _listOfGiftDescriptions
+            }
+        }
+        println("full list is " + fullList)
+        listOfGiftDescriptions = fullList
+        println("list of Gift Descriptions is " + listOfGiftDescriptions)
+    }
+
+
+
 
     /**
      * Returns a list of date options starting with the current date and the following 3 dates.

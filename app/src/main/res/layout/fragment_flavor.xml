@@ -18,16 +18,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".FlavorFragment">
+    tools:context="com.example.birthdayNeda.FlavorFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.example.cupcake.model.OrderViewModel" />
+            type="com.example.birthdayNeda.model.OrderViewModel" />
 
         <variable
             name="flavorFragment"
-            type="com.example.cupcake.FlavorFragment" />
+            type="com.example.birthdayNeda.FlavorFragment" />
     </data>
 
     <ScrollView
@@ -39,100 +39,101 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/side_margin">
 
-            <RadioGroup
-                android:id="@+id/flavor_options"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:id="@+id/checkbox_group"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <RadioButton
-                    android:id="@+id/vanilla"
+                <CheckBox
+                    android:id="@+id/checkbox_app"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/app_only)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/app_only)}"
-                    android:text="@string/app_only" />
+                    android:onClick="@{(view)->viewModel.onCheckboxClicked(view)}"
+                    android:text='@{viewModel.giftItems["app"].description}' />
 
-                <RadioButton
-                    android:id="@+id/chocolate"
+                <CheckBox
+                    android:id="@+id/checkbox_lemon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/lemon_tree)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/lemon_tree)}"
-                    android:text="@string/lemon_tree" />
+                    android:onClick="@{(view)->viewModel.onCheckboxClicked(view)}"
+                    android:text='@{viewModel.giftItems["lemon"].description}' />
 
-                <RadioButton
-                    android:id="@+id/red_velvet"
+                <CheckBox
+                    android:id="@+id/checkbox_skatin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/skatin)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/skatin)}"
-                    android:text="@string/skatin" />
+                    android:onClick="@{(view)->viewModel.onCheckboxClicked(view)}"
+                    android:text='@{viewModel.giftItems["skatin"].description}' />
 
-                <RadioButton
-                    android:id="@+id/salted_caramel"
+                <CheckBox
+                    android:id="@+id/checkbox_bod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/bod)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/bod)}"
-                    android:text="@string/bod" />
+                    android:onClick="@{(view)->viewModel.onCheckboxClicked(view)}"
+                    android:text='@{viewModel.giftItems["bod"].description}' />
 
-                <RadioButton
-                    android:id="@+id/coffee"
+                <!--
+                <CheckBox
+                    android:id="@+id/checkbox_all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/all_gifts)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/all_gifts)}"
-                    android:text="@string/all_gifts" />
-            </RadioGroup>
+                    android:onClick="@{(view)->viewModel.onCheckboxClicked(view)}"
+                    android:text='@{viewModel.giftItems["all"].description}' />
 
-            <View
-                android:id="@+id/divider"
-                style="@style/Widget.Cupcake.Divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/side_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/flavor_options" />
+                -->
 
-            <TextView
-                android:id="@+id/subtotal"
-                style="@style/Widget.Cupcake.TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/side_margin"
-                android:text="@{@string/subtotal_hours(viewModel.price)}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider"
-                tools:text="Subtotal $5.00" />
 
-            <Button
-                android:id="@+id/cancel_button"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/side_margin"
-                android:onClick="@{() -> flavorFragment.cancelOrder()}"
-                android:text="@string/cancel"
-                app:layout_constraintEnd_toStartOf="@id/next_button"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/next_button" />
 
-            <Button
-                android:id="@+id/next_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/side_margin"
-                android:onClick="@{() -> flavorFragment.goToNextScreen()}"
-                android:text="@string/next"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/cancel_button"
-                app:layout_constraintTop_toBottomOf="@id/subtotal" />
+            </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</layout>
+                            <View
+                                android:id="@+id/divider"
+                                style="@style/Widget.Cupcake.Divider"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="@dimen/side_margin"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/checkbox_group" />
+
+                            <TextView
+                                android:id="@+id/subtotal"
+                                style="@style/Widget.Cupcake.TextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/side_margin"
+                                android:text="@{@string/subtotal_hours(viewModel.subtotal)}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/divider"
+                                tools:text="Subtotal $5.00" />
+
+                            <Button
+                                android:id="@+id/cancel_button"
+                                style="?attr/materialButtonOutlinedStyle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/side_margin"
+                                android:onClick="@{() -> flavorFragment.cancelOrder()}"
+                                android:text="@string/cancel"
+                                app:layout_constraintEnd_toStartOf="@id/next_button"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/next_button" />
+
+                            <Button
+                                android:id="@+id/next_button"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/side_margin"
+                                android:onClick="@{() -> flavorFragment.goToNextScreen()}"
+                                android:text="@string/next"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/cancel_button"
+                                app:layout_constraintTop_toBottomOf="@id/subtotal" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </ScrollView>
+                </layout>

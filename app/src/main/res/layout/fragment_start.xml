@@ -18,12 +18,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".StartFragment">
+    tools:context="com.example.birthdayNeda.StartFragment">
 
     <data>
         <variable
             name="startFragment"
-            type="com.example.cupcake.StartFragment" />
+            type="com.example.birthdayNeda.StartFragment" />
     </data>
 
     <ScrollView
@@ -64,26 +64,28 @@
                 android:minWidth="@dimen/order_cupcake_button_width"
                 android:onClick="@{() -> startFragment.orderCupcake(1)}"
                 android:text="@string/one_cupcake" />
+            <!--
+                        <Button
+                            android:id="@+id/order_six_cupcakes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/margin_between_elements"
+                            android:minWidth="@dimen/order_cupcake_button_width"
+                            android:onClick="@{() -> startFragment.orderCupcake(2)}"
+                            android:text="@string/six_cupcakes" />
 
-            <Button
-                android:id="@+id/order_six_cupcakes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_between_elements"
-                android:minWidth="@dimen/order_cupcake_button_width"
-                android:onClick="@{() -> startFragment.orderCupcake(2)}"
-                android:text="@string/six_cupcakes" />
+                        <Button
+                            android:id="@+id/order_twelve_cupcakes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/margin_between_elements"
+                            android:minWidth="@dimen/order_cupcake_button_width"
+                            android:onClick="@{() -> startFragment.orderCupcake(5)}"
+                            android:text="@string/twelve_cupcakes" />
 
-            <Button
-                android:id="@+id/order_twelve_cupcakes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_between_elements"
-                android:minWidth="@dimen/order_cupcake_button_width"
-                android:onClick="@{() -> startFragment.orderCupcake(5)}"
-                android:text="@string/twelve_cupcakes" />
-        </LinearLayout>
-    </ScrollView>
-</layout>
+                            -->
+                    </LinearLayout>
+                </ScrollView>
+            </layout>
