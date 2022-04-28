@@ -1,3 +1,14 @@
+TAMARA'S NOTES:
+
+This app was a birthday gift for a good friend on her 40th birthday. It's hightly customized for her but was based on the Android Kotlin Cupcake codelab. This app displays a list of possible gifts for her to pick from. She can select when she'd like the gift(s) too. The gift summary can then be sent via another app of her choice to me (or anyone really).
+
+
+
+=================================
+=================================
+=================================
+
+
 Cupcake app
 =================================
 
