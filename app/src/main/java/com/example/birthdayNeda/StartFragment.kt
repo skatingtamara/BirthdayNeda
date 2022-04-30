@@ -69,6 +69,14 @@ class StartFragment : Fragment() {
         findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
     }
 
+    fun startButton() {
+        if (sharedViewModel.noGiftsSet()) {
+            sharedViewModel.setDefaults()
+        }
+        // Navigate to the next destination to select the flavor of the cupcakes
+        findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
+    }
+
     /**
      * This fragment lifecycle method is called when the view hierarchy associated with the fragment
      * is being removed. As a result, clear out the binding object.

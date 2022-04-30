@@ -16,14 +16,17 @@
 package com.example.birthdayNeda
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.bumptech.glide.Glide
 import com.example.cupcake.R
 
 /**
- * Activity for cupcake order flow.
+ * Activity for Birthday Neda flow.
  */
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
@@ -39,7 +42,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         // Set up the action bar for use with the NavController
         setupActionBarWithNavController(navController)
+
     }
+
+
+
 
     /**
      * Handle navigation when the user chooses Up from the action bar.

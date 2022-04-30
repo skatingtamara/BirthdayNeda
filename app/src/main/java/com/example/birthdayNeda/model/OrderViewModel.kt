@@ -15,22 +15,17 @@
  */
 package com.example.birthdayNeda.model
 
-import android.content.res.Resources
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.CheckBox
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import android.widget.ImageView
+import androidx.lifecycle.*
+import com.bumptech.glide.Glide
 import com.example.birthdayNeda.data.GiftSource
 import com.example.cupcake.R
-import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
-import javax.sql.DataSource
+import java.util.*
+
 
 /** Price for a single cupcake */
 private const val PRICE_PER_CUPCAKE = 0.00
@@ -124,6 +119,15 @@ class OrderViewModel : ViewModel() {
     //    updatePrice()
     }
 
+    fun setDefaults() {
+        _quantity.value = 1
+        listOfGiftDescriptions = giftItems["app"]?.let { listOf(it.description) } as MutableList<String>
+
+        Log.d("Default check", "Selected gifts = ${listOfGiftDescriptions}")
+        Log.d( "Default check", "Count of gifts = ${_quantity.value}")
+
+    }
+
     // choose gifts
     fun onCheckboxClicked(view: View) {
         if (view is CheckBox) {
@@ -192,6 +196,10 @@ class OrderViewModel : ViewModel() {
         return _flavor.value.isNullOrEmpty()
     }
 
+    fun noGiftsSet(): Boolean {
+        return _selectedGifts.isNullOrEmpty()
+    }
+
     /**
      * Reset the order by using initial default values for the quantity, flavor, date, and price.
      */
@@ -245,4 +253,10 @@ class OrderViewModel : ViewModel() {
         }
         return options
     }
+
+
+
+
+
+
 }

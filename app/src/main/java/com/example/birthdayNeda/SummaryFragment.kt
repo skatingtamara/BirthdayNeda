@@ -16,13 +16,19 @@
 package com.example.birthdayNeda
 
 import android.content.Intent
+import android.graphics.ImageDecoder
+import android.graphics.drawable.AnimatedImageDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.cupcake.R
 import com.example.cupcake.databinding.FragmentSummaryBinding
 import com.example.birthdayNeda.model.OrderViewModel
@@ -48,8 +54,11 @@ class SummaryFragment : Fragment() {
         val fragmentBinding = FragmentSummaryBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
+
+
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -57,7 +66,36 @@ class SummaryFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = sharedViewModel
             summaryFragment = this@SummaryFragment
+
+
+            // ImageView from layout
+            val ima : ImageView = view.findViewById(R.id.gif)
+            // create AnimatedDrawable
+            val decodedAnimation = ImageDecoder.decodeDrawable(
+                // create ImageDecoder.Source object
+                ImageDecoder.createSource(resources, R.drawable.lemon))
+            // set the drawble as image source of ImageView
+            ima.setImageDrawable(decodedAnimation)
+            // play the animation
+            (decodedAnimation as? AnimatedImageDrawable)?.start()
+
+
         }
+
+
+/*          For a later solution...... a gif would be fun
+        // trying to add a gif
+        //setContentView(R.layout.fragment_summary)
+        context?.let {
+            val media = "https://giphy.com/embed/3ogwG1rvNPnl2DiWrK"
+
+            Glide.with(this)
+                .load(media)            //  Try with a png. @ tamara
+                .into(view.findViewById(R.id.gif))
+        }
+
+*/
+
     }
 
     /**
@@ -116,7 +154,6 @@ class SummaryFragment : Fragment() {
             startActivity(intent)
         }
     }
-
 
 
 

@@ -16,6 +16,7 @@
 -->
 <!-- Layout for order summary -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.birthdayNeda.SummaryFragment">
 
@@ -150,6 +151,20 @@
                 android:onClick="@{() -> summaryFragment.cancelOrder()}"
                 android:text="@string/cancel" />
 
+            <ImageView
+                android:id="@+id/gif"
+                android:background="@drawable/ic_launcher_foreground"
+                android:layout_width="match_parent"
+                android:layout_height="176dp"
+                android:contentDescription="@string/gif"
+                app:srcCompat="@drawable/lemon"
+                tools:srcCompat="@drawable/androidparty" />
+
+
+
+
         </LinearLayout>
+
+
     </ScrollView>
 </layout>

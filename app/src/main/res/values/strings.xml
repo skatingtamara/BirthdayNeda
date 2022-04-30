@@ -37,8 +37,9 @@
     <string name="subtotal_hours">Estimated hours to commit %s</string>
     <string name="total_hours">Total hours to commit %s</string>
     <string name="new_cupcake_order">Neda\'s birthday request</string>
+    <string name="gif">gif</string>
     <string name="gift_details"># of gifts: %1$s \n Selected gifts: %2$s \nGift date: %3$s \n
-        Total hours: %4$s \n\n Welcome 40 and being glamorously selective with the fs you give. XOXOXOXO Love you Neda!!!</string>
+        Total hours: %4$s \n\n Welcome to your 40s and being glamorously selective with the fs you give. XOXOXOXO Love you Neda!!!</string>
     <plurals name="gifts">
         <item quantity="one">%d gift</item>
         <item quantity="other">%d gifts</item>
